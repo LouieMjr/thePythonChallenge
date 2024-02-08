@@ -8,21 +8,23 @@ zobj = BytesIO()
 response_bytes = urllib.request.urlopen(url).read()
 zobj.write(response_bytes)
 
-z = zipfile.ZipFile(zobj)
+z = zipfile.ZipFile(zobj) # didnt have to download the zip file locally
+# z = zipfile.ZipFile('channel.zip') # with zipfile downloaded locally
 
 filenum = "90052"
-lcomment = []
+collected_comments = []
 
 while True:
     if filenum.isdigit():
         filename = filenum + '.txt'
         comment = z.getinfo(filename).comment.decode('utf-8')  # Decode bytes to str
-        # print(comment)
-        lcomment.append(comment)
-        info = z.read(filename)
-        filenum = info.split(b' ')[-1].decode('utf-8')
+        collected_comments.append(comment)
+        # info = z.read(filename)
+        # filenum = info.split(b' ')[-1].decode('utf-8')
+        info = z.read(filename).decode('utf-8')
+        filenum = info.split()[-1] # looks cleaner than above, if you decode first after reading
     else:
         break
 
 z.close()
-print(''.join(lcomment))
+print(''.join(collected_comments))
