@@ -2,6 +2,29 @@ import urllib.request
 import zipfile
 from io import BytesIO
 
+
+filenum = "90052"
+
+def next_File(txt_filenum, collect_comments = []):
+
+    z = zipfile.ZipFile('channel.zip')
+
+    if txt_filenum.isdigit():
+        filename = txt_filenum + '.txt'
+        comment = z.getinfo(filename).comment.decode('utf-8')  # Decode bytes to str
+        collect_comments.append(comment)
+        info = z.read(filename).decode('utf-8')
+        txt_filenum = info.split()[-1]
+        next_File(txt_filenum, collect_comments)
+    
+    collected = ''.join(collect_comments)
+    z.close()
+    return collected
+
+# print(next_File(filenum))
+
+###--------------------------------------------------------------------------------------###
+
 url = "http://pythonchallenge.com/pc/def/channel.zip"
 zobj = BytesIO()
 
@@ -11,7 +34,6 @@ zobj.write(response_bytes)
 z = zipfile.ZipFile(zobj) # didnt have to download the zip file locally
 # z = zipfile.ZipFile('channel.zip') # with zipfile downloaded locally
 
-filenum = "90052"
 collected_comments = []
 
 while True:
