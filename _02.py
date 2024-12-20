@@ -1,7 +1,8 @@
-import requests, string
+from requests import get 
+from string import ascii_letters
 from bs4 import BeautifulSoup, Comment
 
-res = requests.get("http://www.pythonchallenge.com/pc/def/ocr.html")
+res = get("http://www.pythonchallenge.com/pc/def/ocr.html")
 
 soup = BeautifulSoup(res.text, 'html.parser')
 
@@ -9,7 +10,7 @@ soup = BeautifulSoup(res.text, 'html.parser')
 
 rare = soup.find_all(string=lambda text: isinstance(text, Comment))[1]
 
-print([ele for ele in rare if ele in string.ascii_letters])
+print("".join([ele for ele in rare if ele in ascii_letters]))
 
 # countObj = {};
 # newtxt = '';
