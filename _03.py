@@ -9,8 +9,8 @@ soup = BeautifulSoup(response.text, 'html.parser')
 
 comment = (soup.find_all(string=lambda text: isinstance(text, Comment)))
 
-pattern = r"[a-z][A-Z]{3}[a-z][A-Z]{3}[a-z]"
-match = re.findall(pattern, *comment) # unpack/spread array with *
+pattern = r"[a-z][A-Z]{3}([a-z])[A-Z]{3}[a-z]"
+match = "".join(re.findall(pattern, *comment)) # unpack/spread array with *
 print(match) # look at small letter in each of the given strings to makeup answer!
 
 # import re
