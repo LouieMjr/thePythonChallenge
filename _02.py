@@ -11,22 +11,3 @@ soup = BeautifulSoup(res.text, 'html.parser')
 rare = soup.find_all(string=lambda text: isinstance(text, Comment))[1]
 
 print("".join([ele for ele in rare if ele in ascii_letters]))
-
-# countObj = {};
-# newtxt = '';
-
-
-# for element in rare[1]:
-#   for symbol in element:
-#     if symbol in countObj:
-#       countObj[symbol] += 1;
-#     else:
-#       countObj[symbol] = 1;
-
-# print(countObj);
-
-# for symbol in countObj:
-#   if countObj[symbol] == 1:
-#     newtxt += symbol;
-
-# print(newtxt);

@@ -8,10 +8,9 @@ newtxt = ''
 
 for letter in string.ascii_lowercase:
   found = string.ascii_lowercase.find(letter)
-  if(found == -1):
-    newtxt += '';
+    # if(found == -1):
+    #   newtxt += '';
   index = found + 2
-  # print(index, letter)
   if(index >= 26):
     newtxt += string.ascii_lowercase[index - found]
   else:
